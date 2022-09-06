@@ -22,6 +22,7 @@ function getApi() {
     });
   }
 
+
   function getWeather(lat, lon, currentCity) {
     var requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${andrewsApi}&units=imperial`;
   
@@ -47,21 +48,21 @@ function getApi() {
             <p>UV index: <span class="current rounded py-2 px-2 text-white" id="uv-index"></span>${uvi}</p>
         </div>` 
 
+        for(let i = 0; i < 5; i++) {
+            $("#fiveday").append(
+        
+            `<div class="col-sm-2 bg-primary text-light m-2 p-2">
+                <p>${data.daily[i].dt}</p>
+                <p></p>
+                <p>Temp:<span> ${data.daily[i].temp.day}</span></p>
+                <p>Wind:<span> ${data.daily[i].wind_speed}</span></p>
+                <p>Humidity:<span> ${data.daily[i].humidity}</span></p>
+            </div>`
+            )
+        }
+
     });
 
-}
-
-for(let i = 0; i < 5; i++) {
-    $("#fiveday").append(
-
-    `<div class="col-sm-2 bg-primary text-light m-2 p-2">
-        <p>${i + 1}</p>
-        <p></p>
-        <p>Temp:<span></span></p>
-        <p>Wind:<span></span></p>
-        <p>Humidity:<span></span></p>
-    </div>`
-    )
-}
+  }
 
 getApi();
