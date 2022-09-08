@@ -1,6 +1,7 @@
 const apiKey = "ff77349cf3ff082fc8d44b4a9ebb3767"
-const andrewsApi = "7a6b3354e50774f952a848fe125c2899"
-const cityName = "tucson"
+var cityName = "tucson"
+
+let date = moment().format("MMM DD, YYYY");
 
 function getApi() {
     var requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
@@ -10,11 +11,12 @@ function getApi() {
         return response.json();
       })
       .then(function (data) {
-        getWeather(data[0].lat, data[0].lon);
+        //getWeather(data[0].lat, data[0].lon);
         var lat = data[0].lat;
         var lon = data[0].lon;
         var currentCity = data[0].name
 
+        console.log(data);
         console.log('lat', lat)
         console.log('lon', lon)
         console.log('name', currentCity);
@@ -24,7 +26,7 @@ function getApi() {
 
 
   function getWeather(lat, lon, currentCity) {
-    var requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${andrewsApi}&units=imperial`;
+    var requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
   
     fetch(requestUrl)
       .then(function (response) {
@@ -52,7 +54,7 @@ function getApi() {
             $("#fiveday").append(
         
             `<div class="col-sm-2 bg-primary text-light m-2 p-2">
-                <p>${data.daily[i].dt}</p>
+                <p>${date}</p>
                 <p></p>
                 <p>Temp:<span> ${data.daily[i].temp.day}</span></p>
                 <p>Wind:<span> ${data.daily[i].wind_speed}</span></p>
