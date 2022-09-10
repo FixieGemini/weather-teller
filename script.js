@@ -1,22 +1,22 @@
 const apiKey = "ff77349cf3ff082fc8d44b4a9ebb3767"
-var cityName = "tucson"
+var city = "tucson"
 
 let date = moment().format("MMM DD, YYYY");
 
 const addCities = $('.add-cities');
-const citiesList = $('.cites');
+const citiesList = $('.cities');
 const cities = JSON.parse(localStorage.getItem('cities')) || [];
 
 function addCity(event) {
     event.preventDefault();
-    const text = (this.$('name=city')).value;
-    const item = {
+    const text = (this.querySelector('[name=city]')).value;
+    const city = {
         text
     };
 
-    cities.push(item);
-    populateList(city, citiesList);
-    localStorage.setItem('items', JSON.stringify(cities));
+    cities.push(city);
+    populateList(cities, citiesList);
+    localStorage.setItem('cities', JSON.stringify(cities));
     this.reset();
 }
 
@@ -30,11 +30,11 @@ function populateList(cities = [], citiesList) {
     });
 }
 
-addCities.addEventListener('btn', addCity);
+addCities.on('submit', addCity);
 populateList(cities, citiesList);
 
 function getApi() {
-    var requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
+    var requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
   
     fetch(requestUrl)
       .then(function (response) {
