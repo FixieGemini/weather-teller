@@ -1,5 +1,5 @@
 const apiKey = "ff77349cf3ff082fc8d44b4a9ebb3767"
-var city = "tucson"
+var city = "Tucson"
 
 let date = moment().format("MMM DD, YYYY");
 
@@ -21,13 +21,15 @@ function addCity(event) {
 }
 
 function populateList(cities = [], citiesList) {
-    citiesList.innerHTML = cities.map((city, i) => {
+    console.log('function running!');
+    
+    citiesList.html(cities.map((city, i) => {
         return `
         <li>
         <label for='city${i}'>${city.text}</label>
-        <li>
+        </li>
         `;
-    });
+    }));
 }
 
 addCities.on('submit', addCity);
@@ -41,7 +43,6 @@ function getApi() {
         return response.json();
       })
       .then(function (data) {
-        //getWeather(data[0].lat, data[0].lon);
         var lat = data[0].lat;
         var lon = data[0].lon;
         var currentCity = data[0].name
@@ -53,7 +54,6 @@ function getApi() {
         getWeather(lat, lon, currentCity)
     });
   }
-
 
   function getWeather(lat, lon, currentCity) {
     var requestUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
