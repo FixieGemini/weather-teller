@@ -23,10 +23,10 @@ function addCity(event) {
 function populateList(cities = [], citiesList) {
     console.log('function running!');
     
-    citiesList.html(cities.map((city, i) => {
+    citiesList.html(cities.map((city) => {
         return `
         <li>
-        <label for='city${i}'>${city.text}</label>
+        <button onclick='getApi'("${city.text}) >${city.text}</button>
         </li>
         `;
     }));
@@ -35,7 +35,7 @@ function populateList(cities = [], citiesList) {
 addCities.on('submit', addCity);
 populateList(cities, citiesList);
 
-function getApi() {
+function getApi(city) {
     var requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
   
     fetch(requestUrl)
@@ -111,4 +111,7 @@ function getApi() {
     }
 }
 
-getApi();
+$('#search').click(function(){
+  let city = $('#cityName').val()
+  getApi(city)
+});
