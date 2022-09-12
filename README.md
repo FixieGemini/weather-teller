@@ -15,3 +15,5 @@ This website uses the openweather api to return weather conditions based on the 
 
 #### Link to deployed github and screenshot
 https://fixiegemini.github.io/weather-teller/
+
+![fixiegemini github io_weather-teller_](https://user-images.githubusercontent.com/109640240/189725717-4ee503b6-acdd-4108-84ad-10f323b8c63a.png)
